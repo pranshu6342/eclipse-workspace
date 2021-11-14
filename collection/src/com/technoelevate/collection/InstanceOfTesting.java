@@ -18,8 +18,13 @@ public class InstanceOfTesting {
 				list.remove(i);
 			}
 		}
+		Object[] obj = new Object[list.size()];
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
+			obj[i] = list.get(i);
+		}
+		Arrays.sort(obj);
+		for (int i = 0; i < obj.length; i++) {
+			System.out.println(obj[i]);
 		}
 	}
 }
