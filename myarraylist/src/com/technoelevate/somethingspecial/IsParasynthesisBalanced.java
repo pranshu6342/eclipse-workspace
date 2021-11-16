@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class ParacentesisBalanced {
+public class IsParasynthesisBalanced {
 	private HashMap<Character, Character> map = new HashMap<>(5, 5);
 	private Stack<Character> myStack = new Stack<>();
 	private String symbol = "{}()<>[]";
@@ -42,7 +42,7 @@ public class ParacentesisBalanced {
 
 	public static void main(String[] args) {
 
-		ParacentesisBalanced balanced = new ParacentesisBalanced();
+		IsParasynthesisBalanced balanced = new IsParasynthesisBalanced();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter String including test symbols...");
 		String input = sc.next();

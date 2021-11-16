@@ -22,26 +22,31 @@ public class ParkingBooth {
 				if (vName.equalsIgnoreCase("activa")) {
 					Activa activa = new Activa();
 					token = p.comesIn(activa);
+					dateTime=LocalDateTime.now();
 					System.out.println("token no : " + token.getToken() +" | "+dateTime+ " | amount : 20");
 				}
 				if (vName.equalsIgnoreCase("bullet")) {
 					Bullet bullet = new Bullet();
 					token = p.comesIn(bullet);
+					dateTime=LocalDateTime.now();
 					System.out.println("token no : " + token.getToken() +" | "+dateTime+  " | amount : 20");
 				}
 				if (vName.equalsIgnoreCase("nano")) {
 					nano nano = new nano();
 					token = p.comesIn(nano);
+					dateTime=LocalDateTime.now();
 					System.out.println("token no : " + token.getToken() +" | "+dateTime+  " | amount : 40");
 				}
 				if (vName.equalsIgnoreCase("inova")) {
 					Inova inova = new Inova();
 					token = p.comesIn(inova);
+					dateTime=LocalDateTime.now();
 					System.out.println("token no : " + token.getToken() +" | "+dateTime+  " | amount : 40");
 				}
 				if (vName.equalsIgnoreCase("amphibian")) {
 					Amphibian amphibian = new Amphibian();
 					token = p.comesIn(amphibian);
+					dateTime=LocalDateTime.now();
 					System.out.println("token no : " + token.getToken() +" | "+dateTime+  " | amount : 60");
 				}
 				break;
