@@ -1,0 +1,86 @@
+RDBMS:
+
+**********************************
+
+A relational database, also called Relational Database Management System (RDBMS) or SQL database, stores data in tables and rows also referred to as records. The term “relational database” was first used in 1970 by E.F. Codd at IBM in his research paper “A Relational Model of Data for Large Shared Data Banks.” Historically, the most popular relational databases have been Microsoft SQL Server, Oracle Database, MySQL and IBM DB2. Several free versions of these RDBMS platforms have gained popularity over the years, such as SQL Server Express, PostgreSQL, SQLite, MySQL and MariaDB.
+
+A relational database works by linking information from multiple tables through the use of “keys.” A key is a unique identifier which can be assigned to a row of data contained within a table. This unique identifier, called a “primary key,” can then be included in a record located in another table when that record has a relationship to the primary record in the main table. When this unique primary key is added to a record in another table, it is called a “foreign key” in the associated table. The connection between the primary and foreign key then creates the “relationship” between records contained across multiple tables.
+
+This image illustrates a primary/foreign key relationship between two tables. The Employees table contains a single row representing an employee with each employee assigned a unique id (primary key). In this case, the primary key is named EmployeeId. The second table, Sales, contains individual sales records that are then associated with the employee that made the sale. Because an employee can make multiple sales, their unique EmployeeId (primary key), can appear multiple times in the Sales table as a foreign key.
+
+Example of how relational databases work
+ 
+
+One significant advantage to using an RDBMS is “referential integrity.”  Referential integrity refers to the accuracy and consistency of data. This data integrity is achieved by using these primary and foreign keys. 
+
+Referential integrity preserves data integrity through “constraints.”  Constraints are the rules that enforce the data’s accuracy by preventing a related record from being deleted without first deleting the primary record in the main table. If a primary-foreign key relationship has been properly added, then attempting to delete a primary record without first removing related records from other tables will block the transaction until the related records are removed. This prevents what is referred to as “orphaned records,” which are referenced records in a table that no longer have a primary record in the main table. 
+
+The three rules that referential integrity enforces are:
+
+1.    A foreign key must have a corresponding primary key. (“No orphans” rule.)
+
+2.    When a record in a primary table is deleted, all related records referencing the primary key must also be deleted, which is typically accomplished by using cascade delete.
+
+3.    If the primary key for a record changes, all corresponding records in other tables using the primary key as a foreign key must also be modified.  This can be accomplished by using a cascade update.
+
+ 
+
+Querying the data in a relational database management system is done by using Structured Querying Language (SQL), which is a robust language designed for managing the data housed in a relational database.
+
+SQL has the capabilities to create, retrieve, update and delete records and heavily relies on this primary/foreign key relationship to identify related data across multiple tables. The capabilities of SQL make the relational database system the first choice for any application requiring strong transactional functionality, data mining and complex reporting. 
+
+This SQL statement demonstrates retrieving a result set of how all the sales records for a single employee whose EmployeeId = 1 would be retrieved. 
+
+SELECT * FROM Employees
+
+JOIN Sales ON Employees.EmployeeId = SALES.EmployeeId
+
+WHERE EmployeeId = 1
+
+This next SQL statement is an example of a query implementing joins on multiple tables. In this case, the SQL query is retrieving all of the employee information, sales information, and the customer information from the Customers table.
+
+SELECT * FROM Employees
+
+JOIN Sales ON Employees.EmployeeId = SALES.EmployeeId
+
+JOIN Customers ON Customers.CustomerId = SALES.CustomerId
+
+WHERE EmployeeId = 1
+
+Relational databases also provide functionality called “indexing.”  A database index is a data structure which improves the speed of data retrieval. Indexes are commonly added to data fields that are routinely used to query and join tables. In the above SQL statements EmployeeId and CompanyId would be candidates for this type of optimization.
+
+ 
+******************
+Non-relational databases:
+********************
+
+The non-relational database, or NoSQL database, stores data. However, unlike the relational database, there are no tables, rows, primary keys or foreign keys.  Instead, the non-relational database uses a storage model optimized for specific requirements of the type of data being stored.
+
+Some of the more popular NoSQL databases are MongoDB, Apache Cassandra, Redis, Couchbase and Apache HBase.
+
+There are four popular non-relational types: document data store, column-oriented database, key-value store and graph database.  Often combinations of these types are used for a single application.
+
+Document data stores
+A document data store manages a set of named string fields and object data values in an entity referred to as a “document” typically stored in the form of JSON documents, which can be encoded in a variety of ways, including XML, YAML, JSON, BSON or as plain text. The fields within documents are exposed, allowing an application to query and filter data using field values.
+
+The document stores do not require all documents to maintain identical data structures, which provides a great deal of flexibility.  It’s easy to see then how this flexibility can be leveraged as an organization’s requirements change.
+
+Columnar (or column oriented) data stores
+A columnar data store organizes data into columns, which is conceptually similar to the relational database. The true advantage of a column-family database is in its denormalized approach to structuring sparse data, which comes from its column-oriented approach to storing data.
+
+Key-value stores
+This is the least complicated of the NoSQL databases and, as the name would indicate, the key-value store is simply a collection of key-value pairs contained within an object. 
+
+Document stores
+Document stores are a bit more complex than key-value stores.  They don’t assume a particular document structure specified with a schema. The document store is designed to store everyday documents as is, and they allow for complicated querying.
+
+MongoDB and CouchDB are both examples of document stores. 
+
+Graph databases
+Last is the most complex non-relational database type.  It’s designed to efficiently store relations between entities. When data is greatly interconnected, such as purchasing and manufacturing systems or referencing catalogs, graph databases are a good solution.
+
+The possibilities for graph NoSQL databases are infinite, and with the data we collect becoming increasingly interconnected, graph databases are going to continue to gain in popularity, including the still-dominant relational database.
+
+Instead of the Structure Query Language (SQL) used by relational databases, the NoSQL database uses Object-relational-mapping (ORM).  The concept of ORM is the ability to write queries using your preferred programming language.  Some of the more popular ORMs are Java, Javascript, .NET and PHP.
+
+ 

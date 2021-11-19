@@ -1,0 +1,130 @@
+mysql> create database hardware;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use hardware;
+Database changed
+mysql> create table electronic_items (id int(5) primary key, item_name varchar(25) not null, item_cost int(6), item_dom date);
+Query OK, 0 rows affected, 2 warnings (0.05 sec)
+
+mysql> desc electronic_items;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int         | NO   | PRI | NULL    |       |
+| item_name | varchar(25) | NO   |     | NULL    |       |
+| item_cost | int         | YES  |     | NULL    |       |
+| item_dom  | date        | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into electronic_items values (1201, 'LED TV', 50000, '2021-10-01');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into electronic_items values (1236, 'Home Theatre', 32000, '2021-10-02');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into electronic_items values (1062, 'Bluetooth Speakers', 15000, '2021-11-02');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into electronic_items values (1160, 'Split Ac', 152000, '2021-09-12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into electronic_items values (1530, 'Washing Machine', 56000, '2021-09-22');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into electronic_items values (1312, 'Refridgetor', 70000, '2021-08-02');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from electronic_items;
++------+--------------------+-----------+------------+
+| id   | item_name          | item_cost | item_dom   |
++------+--------------------+-----------+------------+
+| 1062 | Bluetooth Speakers |     15000 | 2021-11-02 |
+| 1160 | Split Ac           |    152000 | 2021-09-12 |
+| 1201 | LED TV             |     50000 | 2021-10-01 |
+| 1236 | Home Theatre       |     32000 | 2021-10-02 |
+| 1312 | Refridgetor        |     70000 | 2021-08-02 |
+| 1530 | Washing Machine    |     56000 | 2021-09-22 |
++------+--------------------+-----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from electronic_items where item_dom like '%-10-%';
++------+--------------+-----------+------------+
+| id   | item_name    | item_cost | item_dom   |
++------+--------------+-----------+------------+
+| 1201 | LED TV       |     50000 | 2021-10-01 |
+| 1236 | Home Theatre |     32000 | 2021-10-02 |
++------+--------------+-----------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from electronic_items where item_dom like '%-09-_2';
++------+-----------------+-----------+------------+
+| id   | item_name       | item_cost | item_dom   |
++------+-----------------+-----------+------------+
+| 1160 | Split Ac        |    152000 | 2021-09-12 |
+| 1530 | Washing Machine |     56000 | 2021-09-22 |
++------+-----------------+-----------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from electronic_items order by id;
++------+--------------------+-----------+------------+
+| id   | item_name          | item_cost | item_dom   |
++------+--------------------+-----------+------------+
+| 1062 | Bluetooth Speakers |     15000 | 2021-11-02 |
+| 1160 | Split Ac           |    152000 | 2021-09-12 |
+| 1201 | LED TV             |     50000 | 2021-10-01 |
+| 1236 | Home Theatre       |     32000 | 2021-10-02 |
+| 1312 | Refridgetor        |     70000 | 2021-08-02 |
+| 1530 | Washing Machine    |     56000 | 2021-09-22 |
++------+--------------------+-----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from electronic_items order by id desc;
++------+--------------------+-----------+------------+
+| id   | item_name          | item_cost | item_dom   |
++------+--------------------+-----------+------------+
+| 1530 | Washing Machine    |     56000 | 2021-09-22 |
+| 1312 | Refridgetor        |     70000 | 2021-08-02 |
+| 1236 | Home Theatre       |     32000 | 2021-10-02 |
+| 1201 | LED TV             |     50000 | 2021-10-01 |
+| 1160 | Split Ac           |    152000 | 2021-09-12 |
+| 1062 | Bluetooth Speakers |     15000 | 2021-11-02 |
++------+--------------------+-----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from electronic_items where id between 1100 and 1300;
++------+--------------+-----------+------------+
+| id   | item_name    | item_cost | item_dom   |
++------+--------------+-----------+------------+
+| 1160 | Split Ac     |    152000 | 2021-09-12 |
+| 1201 | LED TV       |     50000 | 2021-10-01 |
+| 1236 | Home Theatre |     32000 | 2021-10-02 |
++------+--------------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from electronic_items where id in(1312,1530);
++------+-----------------+-----------+------------+
+| id   | item_name       | item_cost | item_dom   |
++------+-----------------+-----------+------------+
+| 1312 | Refridgetor     |     70000 | 2021-08-02 |
+| 1530 | Washing Machine |     56000 | 2021-09-22 |
++------+-----------------+-----------+------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table electronic_items
+    -> drop column id;
+Query OK, 6 rows affected (0.11 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from electronic_items;
++--------------------+-----------+------------+
+| item_name          | item_cost | item_dom   |
++--------------------+-----------+------------+
+| Bluetooth Speakers |     15000 | 2021-11-02 |
+| Split Ac           |    152000 | 2021-09-12 |
+| LED TV             |     50000 | 2021-10-01 |
+| Home Theatre       |     32000 | 2021-10-02 |
+| Refridgetor        |     70000 | 2021-08-02 |
+| Washing Machine    |     56000 | 2021-09-22 |
++--------------------+-----------+------------+
+6 rows in set (0.00 sec)
