@@ -1,0 +1,369 @@
+74.DISPLAY THE LOCATION OF ALL THE DEAPRTMENTS WHICH HAVE EMPLOYEES JOINED 
+IN THE YEAR 81.
+
+mysql> SELECT LOC FROM DEPT WHERE DEPTNO IN(SELECT DEPTNO FROM EMP WHERE HIREDATE LIKE '%81%');
++----------+
+| LOC      |
++----------+
+| NEW YORK |
+| DALLAS   |
+| CHICAGO  |
++----------+
+3 rows in set (0.02 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+75.DISPLAY DEPARTMENT WISE MINIMUM SALARY WHICH IS LESS THAN AVERAGE 
+SALARY OF EMPLOYEES.
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+76.DISPLAY ALL THE EMPLOYEES WHO ARE REPORTING TO 'JONES'
+
+
+
+mysql> select ename from emp where empno in(select mgr from emp where ename ='BLAKE');
++-------+
+| ename |
++-------+
+| KING  |
++-------+
+1 row in set (0.00 sec)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+77.DISPLAY ALL THE EMPLOYEE INFORMATION WHO ARE LIVING IN A LOCATION WHICH 
+IS HAVING AT LEAST 2 'O' IN IT.
+
+
+
+
+mysql> SELECT * FROM EMP WHERE DEPTNO IN(SELECT DEPTNO FROM DEPT WHERE LOC LIKE '%O%');
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250 |  500 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450 | NULL |     10 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-09 | 1500 |    0 |     30 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-11-03 |  950 | NULL |     30 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+8 rows in set (0.00 sec)
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+78.DISPLAY THE NAMES OF EMPLOYEE FROM DEPARTMENT NUMBER 10 WITH SALARY 
+GREATER THAN THAT OF ALL EMPLOYEE WORKING IN OTHER DEPARTMENTS.
+
+
+
+mysql> SELECT * FROM EMP WHERE SAL =(SELECT MAX(SAL) FROM EMP WHERE DEPTNO=10);
++-------+-------+---------+------+------------+------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+-------+---------+------+------------+------+------+--------+
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850 | NULL |     10 |
++-------+-------+---------+------+------------+------+------+--------+
+1 row in set (0.00 sec)
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+79.DISPLAY THE NAMES OF EMPLOYEES WHO EARN HIGHEST SALARY IN THEIR 
+RESPECTIVE JOBS.
+
+
+mysql> SELECT DISTINCT(ENAME),JOB FROM EMP WHERE SAL IN(SELECT MAX(SAL) FROM EMP GROUP BY JOB);
++--------+-----------+
+| ENAME  | JOB       |
++--------+-----------+
+| ALLEN  | SALESMAN  |
+| BLAKE  | MANAGER   |
+| SCOTT  | ANALYST   |
+| KING   | PRESIDENT |
+| FORD   | ANALYST   |
+| MILLER | CLERK     |
++--------+-----------+
+6 rows in set (0.00 sec)
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+80. DISPLAY THE EMPLOYEE NUMBER AND NAME OF EMPLOYEE WORKING AS CLERK AND 
+EARNING HIGHEST SALARY AMONG CLERKS.
+
+
+mysql> SELECT EMPNO,ENAME FROM EMP WHERE SAL IN(SELECT MAX(SAL) FROM EMP WHERE JOB='CLERK');
++-------+--------+
+| EMPNO | ENAME  |
++-------+--------+
+|  7934 | MILLER |
++-------+--------+
+1 row in set (0.00 sec)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+81. WRITE A QUERY TO FIND SMITH'S MANAGER'S MANAGER HIREDATE.
+
+
+
+mysql> SELECT HIREDATE FROM EMP WHERE EMPNO=(SELECT MGR FROM EMP WHERE ENAME='SMITH');
++------------+
+| HIREDATE   |
++------------+
+| 1981-11-03 |
++------------+
+1 row in set (0.00 sec)
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+82.LIST THE NUMBER OF EMPLOYEES WHOSE JOB IS SALESMAN WORKING FOR NEWYORK 
+AND CHICAGO.
+
+
+mysql> SELECT COUNT(*)  FROM EMP WHERE JOB='SALESMAN' AND DEPTNO IN(SELECT DEPTNO FROM DEPT WHERE LOC IN('NEWYORK','CHICAGO'));
++----------+
+| COUNT(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.02 sec)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+83. LIST THE DEPARTMENT NAMES IN WHICH THE EMPLOYEES ARE HIRED BETWEEN 1ST 
+OF JAN 1981 AND 31ST DEC 1982 WITH SALARY MORE THAN 1800.
+
+
+
+mysql> SELECT DNAME FROM DEPT WHERE DEPTNO IN(SELECT DEPTNO FROM EMP WHERE HIREDATE BETWEEN '1981-01-01' AND '1982-12-31' AND SAL>1800);
++------------+
+| DNAME      |
++------------+
+| ACCOUNTING |
+| RESEARCH   |
+| SALES      |
++------------+
+3 rows in set (0.02 sec)
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+84.DISPLAY LOCATION OF THE EMPLOYEE WHO EARN MAXIMUM SALARY AND HAVE NO 
+REPORTING MANAGER.
+
+
+
+
+mysql> SELECT LOC FROM DEPT WHERE DEPTNO IN(SELECT DEPTNO FROM EMP WHERE SAL =(SELECT MAX(SAL) FROM EMP WHERE JOB !='MANAGER'));
++----------+
+| LOC      |
++----------+
+| NEW YORK |
++----------+
+1 row in set (0.00 sec)
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+85. LIST EMPLOYEES WHO WORKS FOR ACCOUNTING DEPARTMENT AND THEIR SALARY 
+GREATER THAN AVERAGE SALARY OF THEIR DEPARTMENT.
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+86. DISPLAY LOCATION OF THE EMPLOYEE WHO EARN COMMISSION.
+
+
+
+
+
+mysql> SELECT LOC FROM DEPT WHERE DEPTNO IN(SELECT DEPTNO FROM EMP WHERE COMM IS NOT NULL);
++----------+
+| LOC      |
++----------+
+| NEW YORK |
+| CHICAGO  |
++----------+
+2 rows in set (0.00 sec)
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+87.LIST THE EMPLOYEES WHO DOES NOT DIRECTLY REPORT TO PRESIDENT,HAVE 
+COMMISSION AND SALARY MORE THAN MAX SALARY OF ALL THE CLERK WITHOUT 
+USING NULL OR NOT NULL.
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+88.DISPLAY ALL THE EMPLOYEES WHOSE SALARY IS GREATER THAN AVG SAL OF 
+DEPARTMENT 20
+
+
+
+mysql> SELECT ENAME FROM EMP WHERE SAL>(SELECT AVG(SAL) FROM EMP WHERE DEPTNO IN(20));
++--------+
+| ENAME  |
++--------+
+| BLAKE  |
+| CLARK  |
+| SCOTT  |
+| KING   |
+| FORD   |
+| NITISH |
++--------+
+6 rows in set (0.00 sec)
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+89. LIST THE EMPLOYEE DEPTNAME AND LOC OF ALL THE EMPLOYEES WHO ARE CLERK 
+,REPORTING TO BLAKE AND SALARY IS LESSER THAN MARTIN SALARY.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+90.DISPLAY LOC AND DNAME WHOSE JOB IS MANAGER AND HAS SAL LESS THAN CLERK.
+
+
+ SELECT DNAME,LOC FROM DEPT WHERE DEPTNO IN(SELECT DEPTNO FROM EMP WHERE JOB IN('MANAGER') AND SAL<(SELECT MIN(SAL) FROM EMP WHERE JOB IN('CLERK')));
+Empty set (0.02 sec)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+91.DISPLAY EMPLOYEES LOCATION WHO HAS SOME COMMISSION.
+
+
+SELECT LOC FROM DEPT WHERE DEPTNO IN(SELECT DEPTNO FROM EMP WHERE COMM IS NOT NULL);
++----------+
+| LOC      |
++----------+
+| NEW YORK |
+| CHICAGO  |
++----------+
+2 rows in set (0.00 sec)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+92.DISPLAY EMPNO, ENAME, JOB, WHOSE JOB HAS 'E' IN IT AND DISPLAY EMPNO IN 
+DESCENDING ORDER
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+93. DISPLAY DNAME, LOC,DEPTNO OF EMPLOYEES WHO HAS SAME REPORTING 
+MANAGER???
+
+
+select dname,loc,deptno from dept where deptno in(select deptno from emp where  empno in(select empno from emp where job in('MANAGER')));
++------------+----------+--------+
+| dname      | loc      | deptno |
++------------+----------+--------+
+| SALES      | CHICAGO  |     30 |
+| ACCOUNTING | NEW YORK |     10 |
++------------+----------+--------+
+2 rows in set (0.00 sec)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+94. DISPLAY AVG SALARY OF ALL EMPLOYEES WHOSE DEPT NAME IS ACCOUNTING???
+
+select avg(sal) from emp where deptno in(select deptno from dept where dname ='ACCOUNTING');
++-----------+
+| avg(sal)  |
++-----------+
+| 2641.6667 |
++-----------+
+1 row in set (0.00 sec)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+95. DISPLAY ALL EMPLOYEES DETAILS WHOSE HIREDATE IS IN YEAR 81???
+
+
+SELECT ENAME FROM EMP WHERE HIREDATE LIKE'1981%';
++--------+
+| ENAME  |
++--------+
+| ALLEN  |
+| WARD   |
+| BLAKE  |
+| CLARK  |
+| KING   |
+| TURNER |
+| JAMES  |
+| FORD   |
++--------+
+8 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+96. DISPAY DETAILS OF SMITH AND EMPLOYEES WORKING AS PRESIDENT ALONG WITH 
+HIKE OF 35% IN SALARY.
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+49.DISPLAY DEPARTMENT NAME OF THE EMPLOYEE WHO EARN MINMUM SALARY AND 
+HAVE REPORTING MANAGER.
+
+select dname from dept where deptno in(select deptno from emp where sal in(select min(sal)
+    -> from emp where job in('MANAGER')));
++------------+
+| dname      |
++------------+
+| ACCOUNTING |
++------------+
+1 row in set (0.07 sec)
+
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+50.DISPLAY HIREDATE AND JOB OF ALL THE EMPLOYEES WORKING FOR SALES.
+
+
+
+SELECT HIREDATE,JOB FROM EMP WHERE JOB IN('SALESMAN');
++------------+----------+
+| HIREDATE   | JOB      |
++------------+----------+
+| 1981-02-20 | SALESMAN |
+| 1981-02-22 | SALESMAN |
+| 1981-09-09 | SALESMAN |
++------------+----------+
+3 rows in set (0.00 sec)
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+51.DISPLAY LOCATION AND DNAME OF EMPLOYEE WHO WORKING AS PRESIDENT.
+
+
+
+SELECT DNAME,LOC FROM DEPT WHERE DEPTNO IN(SELECT DEPTNO FROM EMP WHERE JOB IN('PRESIDENT'));
++------------+----------+
+| DNAME      | LOC      |
++------------+----------+
+| ACCOUNTING | NEW YORK |
++------------+----------+
+1 row in set (0.00 sec)
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+52.DISPLAY THE DNAME OF EMPLOYEES WHOES SALARY IS MAXIMUM SALARY BUT 
+LESSER THAN 3000.
+
+ SELECT DNAME FROM DEPT WHERE DEPTNO IN(SELECT DEPTNO FROM EMP WHERE SAL IN(
+    -> SELECT MAX(SAL) FROM EMP WHERE SAL<3000));
++-------+
+| DNAME |
++-------+
+| SALES |
++-------+
+1 row in set (0.00 sec)
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+53.DISPLAY THE DEPARTMENT NAME WHO ARE REPORTING TO ADAMS.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
