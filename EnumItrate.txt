@@ -1,0 +1,14 @@
+package com.technoelevate.enumtest;
+public class App{
+	   public static void main(String args[]) {
+	      Days days[] = Days.values();
+	      System.out.println("Contents of the enum are: ");
+	    
+	      for(Days day: days) {
+	         System.out.println(day);
+	      }
+	   }
+	}
+enum Days {
+	  Dhananjay,Balla_Venktesh,Monali,Nitish,Bharat_Gc,Weather_is_too_good_to_bad
+	}
