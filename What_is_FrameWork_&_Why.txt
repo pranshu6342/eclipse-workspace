@@ -1,0 +1,7 @@
+What is Frame Work and why?
+
+A framework, or software framework, is a platform that provides a foundation for developing software applications. 
+Think of it as a template of a working program that can be selectively modified by adding code. 
+It uses shared resources – such as libraries, image files, and reference documents – and puts them together in one package. 
+That package can be modified to suit the specific needs of the project. 
+With a framework, the developer can add or replace features to give new functionality to the application.
