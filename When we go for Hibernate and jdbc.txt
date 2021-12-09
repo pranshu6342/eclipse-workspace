@@ -1,0 +1,8 @@
+When we go for Hibernate and jdbc------>>>
+
+
+
+Hibernate is mostly considered for complex apps. JDBC is a much better option, if:
+
+If an app is using a simple database that does not require to migrate, or
+If the application needs data to be stored in database tables that won’t require object-mapping to 2 or 2+ table versions.
